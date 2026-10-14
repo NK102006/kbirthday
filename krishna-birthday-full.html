@@ -537,6 +537,90 @@
       margin-top: 10px;
     }
 
+    /* Page Footer */
+    .page-footer {
+      max-width: 760px;
+      margin: 40px auto 30px;
+      padding: 24px 32px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 240, 250, 0.93) 100%);
+      border: 3px solid rgba(123, 47, 247, 0.3);
+      border-radius: 28px;
+      box-shadow: 0 16px 45px rgba(90, 40, 120, 0.18);
+      text-align: center;
+      position: relative;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .page-footer:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 55px rgba(90, 40, 120, 0.26);
+    }
+
+    .footer-content {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-text {
+      font-family: "Fredoka", sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #7b2ff7 0%, #ff2a7a 50%, #8a4b1f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.3px;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .footer-emoji {
+      display: inline-block;
+      -webkit-text-fill-color: initial;
+      animation: monkeyWiggle 2.6s infinite ease-in-out;
+      transform-origin: 50% 80%;
+      cursor: default;
+    }
+
+    .footer-deco {
+      font-size: 1.4rem;
+      animation: sparklePulse 2s infinite ease-in-out;
+      user-select: none;
+    }
+
+    @keyframes monkeyWiggle {
+      0%, 100% {
+        transform: rotate(0deg) scale(1);
+      }
+      20% {
+        transform: rotate(-12deg) scale(1.12);
+      }
+      40% {
+        transform: rotate(12deg) scale(1.12);
+      }
+      60% {
+        transform: rotate(-6deg) scale(1.06);
+      }
+      80% {
+        transform: rotate(4deg) scale(1.02);
+      }
+    }
+
+    @keyframes sparklePulse {
+      0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.65;
+      }
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
+    }
+
     .photo {
       aspect-ratio: 4 / 5;
       border-radius: 20px;
@@ -895,7 +979,6 @@
 
     <!-- Heartfelt Birthday Paragraph after 4th line/row -->
     <div class="birthday-card reveal" id="birthdayCard">
-      <div class="card-quote">“</div>
       <p class="birthday-paragraph">
         Happy birthday Bebu 😂🥳. Wishing you a very happy day. Thank you bring happiness in my life🫶. Thank you for
         everthing you did for me❤️. I am very grateful to have in my life🫶. You bring happiness, Joy and exictement to
@@ -907,6 +990,17 @@
 
     <!-- Photos: Remaining rows -->
     <div class="photos" id="photos2"></div>
+
+    <!-- Page Footer -->
+    <footer class="page-footer reveal" id="pageFooter">
+      <div class="footer-content">
+        <span class="footer-deco">✨</span>
+        <p class="footer-text">
+          Have a great year Vandri 🫂<span class="footer-emoji">🐒🐵</span>
+        </p>
+        <span class="footer-deco">✨</span>
+      </div>
+    </footer>
   </section>
 
   <!-- Lightbox modal -->
@@ -947,7 +1041,7 @@
       { src: "22.jpeg", alt: "Birthday Photo 22" },
       { src: "21.jpeg", alt: "Birthday Photo 21" },
       { src: "20.jpeg", alt: "Birthday Photo 20", wide: true },
-      { src: "23.jpeg", alt: "Birthday Photo 23", portraitFull: true }
+      { src: "24.jpeg", alt: "Birthday Photo 24", portraitFull: true }
     ];
 
     function buildPerson() {
@@ -973,12 +1067,15 @@
     }, { threshold: 0.1 });
 
     function buildGallery() {
-      // Observe featured 9.jpeg and birthday message card
+      // Observe featured 9.jpeg, birthday message card, and page footer
       const featWrap = document.getElementById("featuredWrap");
       if (featWrap) revealObserver.observe(featWrap);
 
       const bdayCard = document.getElementById("birthdayCard");
       if (bdayCard) revealObserver.observe(bdayCard);
+
+      const pageFooter = document.getElementById("pageFooter");
+      if (pageFooter) revealObserver.observe(pageFooter);
 
       const photosWrap = document.getElementById("photos");
       const photosWrap2 = document.getElementById("photos2");

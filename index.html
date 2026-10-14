@@ -315,10 +315,12 @@
         transform: scale(1.45);
         opacity: 0.1;
       }
+
       50% {
         transform: scale(1.06);
         opacity: 1;
       }
+
       100% {
         transform: scale(1);
         opacity: 1;
@@ -393,7 +395,8 @@
 
     .birthday-text {
       display: block;
-      margin-top: 40px; /* <--- Adjust this value: smaller (e.g. 20px, 30px) = less space, larger = more space */
+      margin-top: 40px;
+      /* <--- Adjust this value: smaller (e.g. 20px, 30px) = less space, larger = more space */
     }
 
     .hero-title small {
@@ -532,6 +535,90 @@
       font-size: 2rem;
       color: var(--brown);
       margin-top: 10px;
+    }
+
+    /* Page Footer */
+    .page-footer {
+      max-width: 760px;
+      margin: 40px auto 30px;
+      padding: 24px 32px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 240, 250, 0.93) 100%);
+      border: 3px solid rgba(123, 47, 247, 0.3);
+      border-radius: 28px;
+      box-shadow: 0 16px 45px rgba(90, 40, 120, 0.18);
+      text-align: center;
+      position: relative;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .page-footer:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 55px rgba(90, 40, 120, 0.26);
+    }
+
+    .footer-content {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-text {
+      font-family: "Fredoka", sans-serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #7b2ff7 0%, #ff2a7a 50%, #8a4b1f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 0.3px;
+      margin: 0;
+      line-height: 1.4;
+    }
+
+    .footer-emoji {
+      display: inline-block;
+      -webkit-text-fill-color: initial;
+      animation: monkeyWiggle 2.6s infinite ease-in-out;
+      transform-origin: 50% 80%;
+      cursor: default;
+    }
+
+    .footer-deco {
+      font-size: 1.4rem;
+      animation: sparklePulse 2s infinite ease-in-out;
+      user-select: none;
+    }
+
+    @keyframes monkeyWiggle {
+      0%, 100% {
+        transform: rotate(0deg) scale(1);
+      }
+      20% {
+        transform: rotate(-12deg) scale(1.12);
+      }
+      40% {
+        transform: rotate(12deg) scale(1.12);
+      }
+      60% {
+        transform: rotate(-6deg) scale(1.06);
+      }
+      80% {
+        transform: rotate(4deg) scale(1.02);
+      }
+    }
+
+    @keyframes sparklePulse {
+      0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.65;
+      }
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
     }
 
     .photo {
@@ -679,10 +766,20 @@
         gap: 12px;
         margin: 16px auto 40px;
       }
+
       .photo {
         border-radius: 14px;
         border-width: 2px;
       }
+
+      .photo.photo-wide {
+        border-radius: 16px;
+      }
+
+      .photo.photo-portrait-full {
+        border-radius: 16px;
+      }
+
       .featured-wrap {
         margin: 24px auto 16px;
         border-radius: 16px;
@@ -731,19 +828,55 @@
     }
 
     @keyframes popperLeftBlast {
-      0% { opacity: 0; transform: scale(0.2) rotate(-35deg); }
-      12% { opacity: 1; transform: scale(1.35) rotate(20deg); }
-      25% { transform: scale(1) rotate(5deg); }
-      75% { opacity: 1; transform: scale(1) translateY(-8px); }
-      100% { opacity: 0; transform: scale(0.6) translateY(-25px); }
+      0% {
+        opacity: 0;
+        transform: scale(0.2) rotate(-35deg);
+      }
+
+      12% {
+        opacity: 1;
+        transform: scale(1.35) rotate(20deg);
+      }
+
+      25% {
+        transform: scale(1) rotate(5deg);
+      }
+
+      75% {
+        opacity: 1;
+        transform: scale(1) translateY(-8px);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-25px);
+      }
     }
 
     @keyframes popperRightBlast {
-      0% { opacity: 0; transform: scale(0.2) rotate(35deg) scaleX(-1); }
-      12% { opacity: 1; transform: scale(1.35) rotate(-20deg) scaleX(-1); }
-      25% { transform: scale(1) rotate(-5deg) scaleX(-1); }
-      75% { opacity: 1; transform: scale(1) translateY(-8px) scaleX(-1); }
-      100% { opacity: 0; transform: scale(0.6) translateY(-25px) scaleX(-1); }
+      0% {
+        opacity: 0;
+        transform: scale(0.2) rotate(35deg) scaleX(-1);
+      }
+
+      12% {
+        opacity: 1;
+        transform: scale(1.35) rotate(-20deg) scaleX(-1);
+      }
+
+      25% {
+        transform: scale(1) rotate(-5deg) scaleX(-1);
+      }
+
+      75% {
+        opacity: 1;
+        transform: scale(1) translateY(-8px) scaleX(-1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: scale(0.6) translateY(-25px) scaleX(-1);
+      }
     }
   </style>
 </head>
@@ -846,7 +979,6 @@
 
     <!-- Heartfelt Birthday Paragraph after 4th line/row -->
     <div class="birthday-card reveal" id="birthdayCard">
-      <div class="card-quote">“</div>
       <p class="birthday-paragraph">
         Happy birthday Bebu 😂🥳. Wishing you a very happy day. Thank you bring happiness in my life🫶. Thank you for
         everthing you did for me❤️. I am very grateful to have in my life🫶. You bring happiness, Joy and exictement to
@@ -858,6 +990,17 @@
 
     <!-- Photos: Remaining rows -->
     <div class="photos" id="photos2"></div>
+
+    <!-- Page Footer -->
+    <footer class="page-footer reveal" id="pageFooter">
+      <div class="footer-content">
+        <span class="footer-deco">✨</span>
+        <p class="footer-text">
+          Have a great year Vandri 🫂<span class="footer-emoji">🐒🐵</span>
+        </p>
+        <span class="footer-deco">✨</span>
+      </div>
+    </footer>
   </section>
 
   <!-- Lightbox modal -->
@@ -879,7 +1022,7 @@
     const PHOTOS = [
       { src: "1.jpeg", alt: "Birthday Photo 1" },
       { src: "2.jpeg", alt: "Birthday Photo 2" },
-      { src: "25.jpeg", alt: "Birthday Photo 25" },
+      { src: "18.jpeg", alt: "Birthday Photo 18" },
       { src: "4.jpeg", alt: "Birthday Photo 4" },
       { src: "5.jpeg", alt: "Birthday Photo 5" },
       { src: "6.jpeg", alt: "Birthday Photo 6" },
@@ -893,7 +1036,7 @@
       { src: "15.jpeg", alt: "Birthday Photo 15" },
       { src: "16.jpeg", alt: "Birthday Photo 16" },
       { src: "17.jpeg", alt: "Birthday Photo 17" },
-      { src: "18.jpeg", alt: "Birthday Photo 18" },
+      { src: "25.jpeg", alt: "Birthday Photo 25" },
       { src: "19.jpeg", alt: "Birthday Photo 19" },
       { src: "22.jpeg", alt: "Birthday Photo 22" },
       { src: "21.jpeg", alt: "Birthday Photo 21" },
@@ -924,12 +1067,15 @@
     }, { threshold: 0.1 });
 
     function buildGallery() {
-      // Observe featured 9.jpeg and birthday message card
+      // Observe featured 9.jpeg, birthday message card, and page footer
       const featWrap = document.getElementById("featuredWrap");
       if (featWrap) revealObserver.observe(featWrap);
 
       const bdayCard = document.getElementById("birthdayCard");
       if (bdayCard) revealObserver.observe(bdayCard);
+
+      const pageFooter = document.getElementById("pageFooter");
+      if (pageFooter) revealObserver.observe(pageFooter);
 
       const photosWrap = document.getElementById("photos");
       const photosWrap2 = document.getElementById("photos2");

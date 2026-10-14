@@ -130,12 +130,14 @@
       animation: none;
     }
 
+    .reveal,
     .photo.reveal {
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.7s ease-out, transform 0.7s ease-out;
     }
 
+    .reveal.in,
     .photo.reveal.in {
       opacity: 1;
       transform: none;
@@ -212,6 +214,143 @@
       color: #2A0A4A;
     }
 
+    /* ============ 5-SECOND COUNTDOWN SCREEN ============ */
+    .countdown-screen {
+      display: none;
+      min-height: 100vh;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 24px;
+      text-align: center;
+      background: radial-gradient(circle at center, rgba(123, 47, 247, 0.12) 0%, rgba(255, 77, 141, 0.05) 50%, transparent 80%);
+    }
+
+    .countdown-screen.active {
+      display: flex;
+    }
+
+    .countdown-badge {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 50px;
+      background: rgba(123, 47, 247, 0.12);
+      border: 1.5px solid rgba(123, 47, 247, 0.35);
+      color: #7b2ff7;
+      font-family: 'Fredoka', sans-serif;
+      animation: fadeUp 0.4s ease-out both;
+    }
+
+    .countdown-title {
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-family: 'Fredoka', sans-serif;
+      font-weight: 700;
+      color: #2A0A4A;
+      margin: 0;
+      animation: fadeUp 0.5s ease-out 0.1s both;
+    }
+
+    .countdown-sub {
+      font-size: clamp(1.05rem, 3vw, 1.4rem);
+      color: #553377;
+      margin: 0;
+      font-family: 'Fredoka', sans-serif;
+      animation: fadeUp 0.5s ease-out 0.2s both;
+    }
+
+    .countdown-circle-box {
+      position: relative;
+      width: clamp(160px, 45vw, 210px);
+      height: clamp(160px, 45vw, 210px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .countdown-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .countdown-bg-ring {
+      fill: none;
+      stroke: rgba(123, 47, 247, 0.12);
+      stroke-width: 8;
+    }
+
+    .countdown-progress-ring {
+      fill: none;
+      stroke: url(#timerGrad);
+      stroke-width: 9;
+      stroke-linecap: round;
+      stroke-dasharray: 326.7;
+      stroke-dashoffset: 0;
+      transition: stroke-dashoffset 0.95s linear;
+      filter: drop-shadow(0 0 10px rgba(255, 77, 141, 0.5));
+    }
+
+    .countdown-number {
+      font-size: clamp(4.5rem, 14vw, 6.5rem);
+      font-weight: 900;
+      font-family: 'Fredoka', sans-serif;
+      background: linear-gradient(135deg, #7b2ff7, #ff4d8d);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      z-index: 2;
+      user-select: none;
+      line-height: 1;
+    }
+
+    @keyframes countPop {
+      0% {
+        transform: scale(1.45);
+        opacity: 0.1;
+      }
+      50% {
+        transform: scale(1.06);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .countdown-pop {
+      animation: countPop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+    }
+
+    .countdown-dots {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .countdown-dots .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: rgba(123, 47, 247, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .countdown-dots .dot.active {
+      background: linear-gradient(135deg, #7b2ff7, #ff4d8d);
+      box-shadow: 0 0 12px rgba(255, 77, 141, 0.6);
+      transform: scale(1.15);
+    }
+
     /* ---------- Screen 2 ---------- */
     #screen2 {
       display: none;
@@ -254,7 +393,7 @@
 
     .birthday-text {
       display: block;
-      margin-top: 80px; /* <--- Adjust this value: higher (e.g. 100px, 120px) = more space between Happy and Birthday */
+      margin-top: 40px; /* <--- Adjust this value: smaller (e.g. 20px, 30px) = less space, larger = more space */
     }
 
     .hero-title small {
@@ -328,14 +467,71 @@
       transform: scale(1.02);
     }
 
-    /* Other photos: pairs of 2 in one row */
+    /* Photos: pairs of 2 in one row */
     .photos {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
       max-width: 1000px;
-      margin: 24px auto 60px;
+      margin: 24px auto;
       width: 100%;
+    }
+
+    #photos {
+      margin-bottom: 24px;
+    }
+
+    #photos2 {
+      margin-top: 24px;
+      margin-bottom: 60px;
+    }
+
+    /* Birthday Message Card after 5th row */
+    .birthday-card {
+      max-width: 1000px;
+      margin: 36px auto;
+      padding: 34px 30px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 244, 250, 0.92) 100%);
+      border: 3px solid rgba(123, 47, 247, 0.3);
+      border-radius: 24px;
+      box-shadow: 0 16px 45px rgba(90, 40, 120, 0.18);
+      text-align: center;
+      position: relative;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .birthday-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 55px rgba(90, 40, 120, 0.26);
+    }
+
+    .card-quote {
+      font-family: "Great Vibes", "Brush Script MT", cursive;
+      font-size: 3.6rem;
+      line-height: 0.8;
+      color: #ab47bc;
+      margin-bottom: 4px;
+      opacity: 0.75;
+      user-select: none;
+    }
+
+    .birthday-paragraph {
+      font-family: "Fredoka", sans-serif;
+      font-size: clamp(1.1rem, 2.2vw, 1.35rem);
+      line-height: 1.85;
+      color: #4a154b;
+      font-weight: 500;
+      margin: 10px 0 14px;
+      letter-spacing: 0.2px;
+    }
+
+    .card-author {
+      font-family: "Great Vibes", "Brush Script MT", cursive;
+      font-size: 2rem;
+      color: var(--brown);
+      margin-top: 10px;
     }
 
     .photo {
@@ -367,6 +563,38 @@
 
     .photo:hover img {
       transform: scale(1.04);
+    }
+
+    .photo.photo-wide {
+      grid-column: 1 / -1;
+      width: 100%;
+      aspect-ratio: 1280 / 854;
+      border-radius: 24px;
+      overflow: hidden;
+    }
+
+    .photo.photo-wide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo.photo-portrait-full {
+      grid-column: 1 / -1;
+      width: 100%;
+      max-width: 1000px;
+      aspect-ratio: 960 / 1280;
+      border-radius: 24px;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .photo.photo-portrait-full img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .photo .placeholder {
@@ -556,6 +784,34 @@
     <button class="next-btn">Next</button>
   </section>
 
+  <!-- ============ COUNTDOWN TIMER SCREEN (5 SECONDS) ============ -->
+  <section id="countdownScreen" class="qscreen countdown-screen">
+    <div class="countdown-badge">✨ Almost there ✨</div>
+    <h2 class="countdown-title">Hold your breath... 🤫</h2>
+    <p class="countdown-sub">Your surprise unlocks in</p>
+    <div class="countdown-circle-box">
+      <svg class="countdown-svg" viewBox="0 0 120 120">
+        <defs>
+          <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#7b2ff7" />
+            <stop offset="50%" stop-color="#ff4d8d" />
+            <stop offset="100%" stop-color="#ffb703" />
+          </linearGradient>
+        </defs>
+        <circle class="countdown-bg-ring" cx="60" cy="60" r="52"></circle>
+        <circle class="countdown-progress-ring" id="countdownProgress" cx="60" cy="60" r="52"></circle>
+      </svg>
+      <div class="countdown-number countdown-pop" id="countdownNum">5</div>
+    </div>
+    <div class="countdown-dots">
+      <span class="dot active"></span>
+      <span class="dot active"></span>
+      <span class="dot active"></span>
+      <span class="dot active"></span>
+      <span class="dot active"></span>
+    </div>
+  </section>
+
   <section id="q6" class="qscreen">
     <h1 class="q-title">uuuuu Gandi</h1>
     <img class="sticker"
@@ -585,8 +841,23 @@
       <img src="9.jpeg" alt="Krishna" class="featured-img" id="featuredImg" />
     </div>
 
-    <!-- Other photos in pair of 2 in one row -->
+    <!-- Photos: First 4 rows (8 photos) -->
     <div class="photos" id="photos"></div>
+
+    <!-- Heartfelt Birthday Paragraph after 4th line/row -->
+    <div class="birthday-card reveal" id="birthdayCard">
+      <div class="card-quote">“</div>
+      <p class="birthday-paragraph">
+        Happy birthday Bebu 😂🥳. Wishing you a very happy day. Thank you bring happiness in my life🫶. Thank you for
+        everthing you did for me❤️. I am very grateful to have in my life🫶. You bring happiness, Joy and exictement to
+        everyone's life. Be little childish it suits on you😁. Don't think too much about others and enjoy your
+        life Dobu 😁🫶😊. 
+      </p>
+      <div class="card-author">💖 Wishing you a day as amazing as you are! 💖</div>
+    </div>
+
+    <!-- Photos: Remaining rows -->
+    <div class="photos" id="photos2"></div>
   </section>
 
   <!-- Lightbox modal -->
@@ -619,7 +890,15 @@
       { src: "12.jpeg", alt: "Birthday Photo 12" },
       { src: "13.jpeg", alt: "Birthday Photo 13" },
       { src: "14.jpeg", alt: "Birthday Photo 14" },
-      { src: "15.jpeg", alt: "Birthday Photo 15" }
+      { src: "15.jpeg", alt: "Birthday Photo 15" },
+      { src: "16.jpeg", alt: "Birthday Photo 16" },
+      { src: "17.jpeg", alt: "Birthday Photo 17" },
+      { src: "18.jpeg", alt: "Birthday Photo 18" },
+      { src: "19.jpeg", alt: "Birthday Photo 19" },
+      { src: "22.jpeg", alt: "Birthday Photo 22" },
+      { src: "21.jpeg", alt: "Birthday Photo 21" },
+      { src: "20.jpeg", alt: "Birthday Photo 20", wide: true },
+      { src: "23.jpeg", alt: "Birthday Photo 23", portraitFull: true }
     ];
 
     function buildPerson() {
@@ -645,14 +924,21 @@
     }, { threshold: 0.1 });
 
     function buildGallery() {
-      // Observe featured 9.jpeg
+      // Observe featured 9.jpeg and birthday message card
       const featWrap = document.getElementById("featuredWrap");
       if (featWrap) revealObserver.observe(featWrap);
 
-      photosWrap.innerHTML = "";
+      const bdayCard = document.getElementById("birthdayCard");
+      if (bdayCard) revealObserver.observe(bdayCard);
+
+      const photosWrap = document.getElementById("photos");
+      const photosWrap2 = document.getElementById("photos2");
+      if (photosWrap) photosWrap.innerHTML = "";
+      if (photosWrap2) photosWrap2.innerHTML = "";
+
       PHOTOS.forEach((p, i) => {
         const div = document.createElement("div");
-        div.className = "photo reveal";
+        div.className = "photo reveal" + (p && p.wide ? " photo-wide" : "") + (p && p.portraitFull ? " photo-portrait-full" : "");
         if (p && p.src) {
           const img = document.createElement("img");
           img.src = p.src;
@@ -666,7 +952,13 @@
         } else {
           div.innerHTML = '<span class="placeholder">Photo ' + (i + 1) + '</span>';
         }
-        photosWrap.appendChild(div);
+
+        // First 4 rows (8 photos: 0 to 7) go into photosWrap, remaining into photosWrap2
+        if (i < 8 || !photosWrap2) {
+          photosWrap.appendChild(div);
+        } else {
+          photosWrap2.appendChild(div);
+        }
         revealObserver.observe(div);
       });
     }
@@ -871,15 +1163,101 @@
 
     window.launchPartyPopper = launchPartyPopper;
 
+    /* ============ 5-SECOND COUNTDOWN CONTROLLER ============ */
+    let countdownRunning = false;
+
+    function startCountdown() {
+      if (countdownRunning) return;
+      countdownRunning = true;
+
+      const countdownScreen = document.getElementById("countdownScreen");
+      const countdownNum = document.getElementById("countdownNum");
+      const countdownProgress = document.getElementById("countdownProgress");
+      if (!countdownScreen || !countdownNum) {
+        revealScreen2();
+        return;
+      }
+
+      countdownScreen.classList.add("active");
+
+      let count = 5;
+      const totalSeconds = 5;
+      const circumference = 2 * Math.PI * 52; // ~326.73
+
+      function updateDisplay() {
+        countdownNum.textContent = count;
+        countdownNum.classList.remove("countdown-pop");
+        void countdownNum.offsetWidth;
+        countdownNum.classList.add("countdown-pop");
+
+        if (countdownProgress) {
+          const progress = (totalSeconds - count) / totalSeconds;
+          countdownProgress.style.strokeDashoffset = circumference * progress;
+        }
+
+        const dots = countdownScreen.querySelectorAll(".dot");
+        dots.forEach((dot, idx) => {
+          if (idx < count) {
+            dot.classList.add("active");
+          } else {
+            dot.classList.remove("active");
+          }
+        });
+
+        if (count > 1) {
+          count--;
+          setTimeout(updateDisplay, 1000);
+        } else {
+          // Final second countdown
+          setTimeout(() => {
+            countdownNum.textContent = "🎉";
+            countdownNum.classList.remove("countdown-pop");
+            void countdownNum.offsetWidth;
+            countdownNum.classList.add("countdown-pop");
+
+            if (countdownProgress) {
+              countdownProgress.style.strokeDashoffset = circumference;
+            }
+
+            setTimeout(() => {
+              countdownScreen.classList.remove("active");
+              countdownRunning = false;
+              const q6 = document.getElementById("q6");
+              if (q6) {
+                q6.classList.add("active");
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              } else {
+                revealScreen2();
+              }
+            }, 700);
+          }, 1000);
+        }
+      }
+
+      updateDisplay();
+    }
+
+    function revealScreen2() {
+      screen2.classList.add("active");
+      buildPerson();
+      buildGallery();
+      launchPartyPopper();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
     questionPages.forEach((page, i) => {
       page.querySelector(".next-btn").addEventListener("click", () => {
         page.classList.remove("active");
-        const next = i + 1 < questionPages.length ? questionPages[i + 1] : screen2;
-        next.classList.add("active");
-        if (next === screen2) {
-          buildPerson();
-          buildGallery();
-          launchPartyPopper();
+        if (page.id === "q5") {
+          // After "uuuuu" slide: trigger 5-second countdown timer!
+          startCountdown();
+        } else if (page.id === "q6") {
+          // After "uuuuu Gandi" slide ("pesh kiya jaye"): reveal the grand surprise!
+          revealScreen2();
+        } else if (i + 1 < questionPages.length) {
+          questionPages[i + 1].classList.add("active");
+        } else {
+          revealScreen2();
         }
       });
     });
